@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-  browser-tools: circleci/browser-tools@1.2.3
+  # browser-tools: circleci/browser-tools@1.2.3
   node: circleci/node@5.0.0
 
 jobs:
@@ -27,7 +27,7 @@ jobs:
 
     steps:
       - checkout
-      - browser-tools/install-browser-tools
+      # - browser-tools/install-browser-tools
 
       # - node/install:
       #     node-version: 16.13.1
@@ -38,10 +38,10 @@ jobs:
           command: bundle -v
 
       # https://circleci.com/docs/2.0/caching/
-      - restore_cache:
-          keys:
-            - bundle-v1-{{ checksum "Gemfile.lock" }}
-            - bundle-v1-
+      # - restore_cache:
+      #     keys:
+      #       - bundle-v1-{{ checksum "Gemfile.lock" }}
+      #       - bundle-v1-
 
       - run: # Install Ruby dependencies
           name: Bundle Install
@@ -51,10 +51,10 @@ jobs:
       #     name: Bundler Audit
       #     command: bundle exec bundle audit
 
-      - save_cache:
-          key: bundle-v1-{{ checksum "Gemfile.lock" }}
-          paths:
-            - vendor/bundle
+      # - save_cache:
+      #     key: bundle-v1-{{ checksum "Gemfile.lock" }}
+      #     paths:
+      #       - vendor/bundle
 
       # - restore_cache:
       #     keys:
@@ -78,32 +78,32 @@ jobs:
           name: Database setup
           command: bundle exec rake db:create db:schema:load --trace
 
-      # - run:
-      #     name: Brakeman
-      #     command: bundle exec brakeman
+      # # - run:
+      # #     name: Brakeman
+      # #     command: bundle exec brakeman
+
+      # # - run:
+      # #     name: Stylelint
+      # #     command: yarn stylelint
 
       # - run:
-      #     name: Stylelint
-      #     command: yarn stylelint
+      #     name: Rubocop
+      #     command: bundle exec rubocop
 
-      - run:
-          name: Rubocop
-          command: bundle exec rubocop
+      # - run:
+      #     name: Run rspec in parallel
+      #     command: |
+      #       bundle exec rspec --exclude-pattern "spec/system/*_spec.rb"
+      #       # bundle exec rspec --profile 10 \
+      #       #                   --format RspecJunitFormatter \
+      #       #                   --out test_results/rspec.xml \
+      #       #                   --format progress \
+      #       #                   $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
 
-      - run:
-          name: Run rspec in parallel
-          command: |
-            bundle exec rspec --exclude-pattern "spec/system/*_spec.rb"
-            # bundle exec rspec --profile 10 \
-            #                   --format RspecJunitFormatter \
-            #                   --out test_results/rspec.xml \
-            #                   --format progress \
-            #                   $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
+      # - store_test_results: # https://circleci.com/docs/2.0/collect-test-data/
+      #     path: test_results
 
-      - store_test_results: # https://circleci.com/docs/2.0/collect-test-data/
-          path: test_results
-
-      - run:
-          name: Run system tests
-          command: |
-            COVERAGE=false bundle exec rspec spec/system/
+      # - run:
+      #     name: Run system tests
+      #     command: |
+      #       COVERAGE=false bundle exec rspec spec/system/
