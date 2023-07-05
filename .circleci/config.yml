@@ -16,7 +16,7 @@ jobs:
       - image: cimg/postgres:10.18
         environment:
           POSTGRES_USER: postgres
-          POSTGRES_DB: stringer_dev
+          POSTGRES_DB: novem_exclusive_test
           POSTGRES_PASSWORD: ""
 
     working_directory: ~/app
