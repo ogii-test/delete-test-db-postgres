@@ -14,3 +14,8 @@ production:
   url: <%= ENV["DATABASE_URL"] %>
   encoding: unicode
   pool: <%= Integer(ENV.fetch("DB_POOL", 15)) %>
+
+novem_exclusive_test:
+  adapter: postgresql
+  database: novem_exclusive_test
+  pool: 5
