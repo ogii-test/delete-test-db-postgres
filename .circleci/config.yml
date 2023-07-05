@@ -10,6 +10,7 @@ jobs:
           POSTGRES_USER: postgres
           POSTGRES_DB: novem_exclusive_test
           POSTGRES_PASSWORD: ""
+          PGHOST: 127.0.0.1
 
     working_directory: ~/app
 
