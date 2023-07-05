@@ -15,11 +15,6 @@ jobs:
 
     steps:
       - checkout
-      # - browser-tools/install-browser-tools
-
-      # - node/install:
-      #     node-version: 16.13.1
-      #     install-yarn: true
 
       - run:
           name: Which bundler?
@@ -34,11 +29,11 @@ jobs:
           name: Bundle Install
           command: bundle check || bundle install
           
-      - run:
-          name: install postgres client
-          command: |
-            apt-get update
-            apt-get install -y postgresql-client
+      # - run:
+      #     name: install postgres client
+      #     command: |
+      #       apt-get update
+      #       apt-get install -y postgresql-client
 
       # - run:
       #     name: Bundler Audit
