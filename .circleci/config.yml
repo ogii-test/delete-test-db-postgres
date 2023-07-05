@@ -4,7 +4,7 @@ jobs:
   build:
     parallelism: 1
     docker:
-      - image: cimg/ruby:3.2.2-browsers #teddybnzx/novem_exclusive_gold:latest
+      - image: cimg/ruby:3.1.2 #teddybnzx/novem_exclusive_gold:latest
       - image: cimg/postgres:10.18
         environment:
           POSTGRES_USER: postgres
